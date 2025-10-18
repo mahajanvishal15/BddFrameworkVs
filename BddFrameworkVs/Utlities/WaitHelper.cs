@@ -45,6 +45,20 @@ namespace BddFrameworkVs.Utlities
                 timeout,
                 pollingInterval);
         }
+        public static IWebElement ElementToBeClickable(
+          IWebDriver driver,
+          By by,
+          TimeSpan? timeout = null,
+          TimeSpan? pollingInterval = null
+          )
+        {
+            return Until(driver,
+                ExpectedConditions.ElementToBeClickable(by),
+                timeout,
+                pollingInterval);
+        }
+
+
 
     }
 }

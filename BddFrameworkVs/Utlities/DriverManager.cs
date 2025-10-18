@@ -31,7 +31,7 @@ namespace BddFrameworkVs.Utlities
         {
             try
             {
-                Drvier?.Quit();
+                Driver?.Quit();
             }
             catch (Exception ex)
             {

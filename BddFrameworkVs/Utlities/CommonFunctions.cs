@@ -32,5 +32,40 @@ namespace BddFrameworkVs.Utlities
             _libFunctions = new LibFunctions(driver);
 
         }
+
+        public void LaunchApplication(string url)
+        {
+            if(DriverManager.IsAlive())
+            { 
+                DriverManager.kill();
+            }
+
+            IWebDriver driver = DriverFactory.InitDriver(ConfigReader.GetBrowser());
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl(url);
+            DriverManager.Driver = driver;  
+            WaitHelper.ElementIsVisible(driver, By.TagName("body"), timeout:TimeSpan.FromSeconds(100));
+        }
+
+        public void VerifColumns(string columns)
+        {
+            var missingColumns = new List<string>();
+
+            string[] columnArray = columns.Split(',');
+            foreach (string column in columnArray)
+            {
+                columName = By.XPath($"//th[normalize-space()='{column.Trim()}']");
+                IWebElement columnElement = WaitHelper.ElementIsVisible(_driver, columName, timeout: TimeSpan.FromSeconds(5));
+                if(columnElement != null)
+                {
+                    ExtentHelper.CurrentSceario.Pass($"Column '{column}' is present in the table.");
+                }
+                else
+                {
+                    ExtentHelper.CurrentSceario.Fail($"Column '{column}' is present in the table.");
+                    missingColumns.Add(column.Trim());
+                }
+            }
+        }
     }
 }
