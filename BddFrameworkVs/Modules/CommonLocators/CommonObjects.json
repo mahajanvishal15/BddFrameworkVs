@@ -1,0 +1,20 @@
+{
+    "CommonObjects": {
+        "LoginButton": {
+            "type": "css",
+            "value": "#login-button"
+        },
+        "UsernameField": {
+            "type": "css",
+            "value": "#username"
+        },
+        "PasswordField": {
+            "type": "css",
+            "value": "#password"
+        },
+        "SubmitButton": {
+            "type": "css",
+            "value": "#submit-button"
+        }
+    }
+}
